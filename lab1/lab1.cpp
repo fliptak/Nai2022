@@ -11,6 +11,12 @@ int main(int argc, char **argv){
     map[""] = [](vector<string> w){
         return "[add][liczba][liczba] lub \n[mod][liczba][liczba] lub \n [sin][liczba]";
     };
+      map["sin"] = [](vector<string> w){
+        string a = w.at(2);
+        double sinus = stod(a);
+        sinus = sin(sinus);
+        return to_string(sinus);
+        };
     map["add"] = [](vector<string> w){
         string a = w.at(2);
         string b = w.at(3);
@@ -21,18 +27,12 @@ int main(int argc, char **argv){
         string b = w.at(3);
         return to_string(stoi(a)%stoi(b));
         };
-    map["sin"] = [](vector<string> w){
-        string a = w.at(2);
-        double sinus = stod(a);
-        sinus = sin(sinus);
-        return to_string(sinus);
-        };
     vector<string> argumenty(argv, argv + argc);
     function f = map.at(argumenty.at(1));
     try{
         cout<<f(argumenty);
     }catch (exception &e){
-        cout<<"blad\n[add][liczba][liczba] lub \n [mod][liczba][liczba] lub \n [sin][liczba]";
+        cout<<"blad\n[sin][liczba]lub \n [mod][liczba][liczba] lub \n [add][liczba][liczba]";
     }
     return 0;
 }
